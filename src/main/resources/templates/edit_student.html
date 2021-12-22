@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management Service</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Student Management System</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/students}">Student Management</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<br>
+<div class="container">
+    <div class ="row">
+        <!--creating bootstrap class for supporting large, medium and small device-->
+        <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class=" text-center">Update Student</h1>
+            <div class ="card-body">
+                <!--@ represents context path of the application name -->
+                <!--with in the curly brasses  we specify the request URl -->
+                <!--adding the model key student to the thymeleaf object-->
+                <form th:action="@{/students/{id}(id=${student.id})}" th:object = "${student}" method ="post">
+                    <div class = "form-group">
+                        <!--thymeleaf bind the value (th:field)firstName to the model attribute (Student Entity ->firstName)-->
+                        <!--in order to bind the input we have to use *{thymeleafobj.attributename} braces-->
+                        <label>Student First Name</label>
+                        <input
+                                type ="text"
+                                name ="firstName"
+                                th:field ="*{firstName}"
+                                class ="form-control"
+                                placeholder = "Enter Student First Name"
+
+                        />
+
+                    </div>
+                    <div class="form-group">
+                        <!--thymeleaf bind the value (th:field)firstName to the model attribute (Student Entity ->lastName)-->
+                        <label>Student Last Name</label>
+                        <input class="form-control"
+                               name="lastName"
+                               placeholder="Enter Student Last Name"
+                               th:field="*{lastName}"
+                               type="text"
+
+                        />
+
+
+                        <!--thymeleaf bind the value (th:field)rollnumber to the model attribute (Student Entity ->rollnumber)-->
+                        <label>Student Roll Number</label>
+                        <input type="text"
+                               name="rollnumber"
+                               th:field="*{rollnumber}"
+                               class="form-control"
+                               placeholder="Enter Student Roll Number"
+
+                        />
+
+                    </div>
+                    <div class = "form-group">
+                        <!--thymeleaf bind the value (th:field)email to the model attribute (Student Entity ->email)-->
+                        <label>Student Email ID</label>
+                        <input type ="text"
+                               name ="email"
+                               th:field ="*{email}"
+                               class ="form-control"
+                               placeholder = "Enter Student Email"
+
+                        />
+
+                    </div>
+                    <!--creating a submit button-->
+                    <!--once we enter all details and click submit then we need to handle this request for that-->
+                    <!--we need to create a handler method to handle this form request action:@{/students}-->
+                    <div class ="footer-body"></div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

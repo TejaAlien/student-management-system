@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System </title>
+    <!--bootstrap below-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<!--inside the body we are creating the container and inside it we create row class-->
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Student Management System</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/students}">Student Management</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+<h1>List of Students</h1>
+    </div>
+    <!--creating a button for the add student feature-->
+    <div class ="row">
+        <!--creating a column-->
+        <div class ="col-lg-3">
+            <!--providing link for the button using anchor tag-->
+            <!--in the boot strap class mentioning the button specifications and the name of the button-->
+            <a th:href="@{/students/new}" class ="btn btn-info btn-sm mb-3"> Add Student</a>
+        </div>
+    </div>
+    <!--Creating the table here-->
+    <!--creating the bootstrap css class table-->
+<table class="table table-striped table-bordered" >
+    <!--first create a table header inside it create a tr-->
+<thead>
+<tr>
+    <!--DEFINE TABLE COLUMN-->
+    <th>Student ID</th>
+    <th>Student First Name</th>
+    <th>Student last Name</th>
+    <th>Student Roll Number</th>
+    <th>Student Email</th>
+    <!--creating column for Actions-->
+    <th>Actions</th>
+</tr>
+</thead>
+    <tbody>
+    <!--thymeleaf attribute to iterate over list of students-->
+    <!--iterating list of students here{students}is a key that we used in model attribute }-->
+    <!--Example for(Student student:students){sysout(student)}-->
+    <tr
+
+            th:each="student: ${students}">
+        <!to display the student fields >
+        <td th:text ="${student.id}"></td>
+        <td th:text="${student.firstName}"></td>
+        <td th:text="${student.lastName}"></td>
+        <td th:text="${student.rollnumber}"></td>
+        <td th:text="${student.email}"></td>
+        <td>
+            <!--adding update button and id we are getting model student so mention student.id-->
+            <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-primary" >Update</a>
+            <a th:href="@{/students/{id}(id=${student.id})}" class="btn btn-danger" >Delete</a>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>
